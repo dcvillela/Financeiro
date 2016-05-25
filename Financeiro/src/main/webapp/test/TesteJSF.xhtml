@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+
+<h:head>
+	<title>Teste JSF 2.2</title>
+</h:head>
+<h:body>
+	<h1>
+		<h:outputText value="Introdução ao JSF 2.2" />
+	</h1>
+	<h:form>
+		<h:graphicImage value="/imagens/jsf.png" width="300" height="150" />
+
+		<hr />
+		<h:outputFormat value="Oi {0}! Existem {1} tarefas pendentes.">
+			<f:param value="#{tarefaBean.nomeUsuario}" />
+			<f:param value="#{tarefaBean.qtdeTarefasPendentes}" />
+		</h:outputFormat>
+
+		<hr />
+		<h:outputLabel value="Nome:" for="nomeInput" />
+		<h:inputText id="nomeInput" />
+
+		<hr />
+		<h:outputLabel value="Time de futebol favorito: " for="timeFutebol" />
+		<h:selectOneMenu value="#{cadastroTorcedorBean.timeFavorito}"
+			id="timeFutebol">
+			<f:selectItem itemValue="Corinthians" />
+			<f:selectItem itemValue="Flamengo" />
+			<f:selectItem itemValue="Palmeiras" />
+			<f:selectItem itemValue="Santos" />
+			<f:selectItem itemValue="São Paulo" />
+			<f:selectItem itemValue="Vasco" itemLabel="Vascão" />
+			<f:selectItem itemValue="Outro" />
+		</h:selectOneMenu>
+		<h:commandButton value="Teste" action="#{cadastroTorcedorBean.teste}" />
+
+		<hr />
+		<h:outputLabel value="Times de futebol favoritos: " for="timesFutebol" />
+		<h:selectManyListbox value="#{cadastroTorcedorBean.timesFavoritos}"
+			id="timesFutebol" size="4">
+			<f:selectItem itemValue="Corinthians" />
+			<f:selectItem itemValue="Flamengo" />
+			<f:selectItem itemValue="Palmeiras" />
+			<f:selectItem itemValue="Santos" />
+			<f:selectItem itemValue="São Paulo" />
+			<f:selectItem itemValue="Vasco" />
+			<f:selectItem itemValue="Outro" />
+		</h:selectManyListbox>
+
+		<hr />
+		<h:outputLabel value="Time de futebol favorito: " for="timeFutebol2" />
+		<h:selectOneListbox value="#{cadastroTorcedorBean.timeFavorito}"
+			id="timeFutebol2" size="4">
+			<f:selectItem itemValue="Corinthians" />
+			<f:selectItem itemValue="Flamengo" />
+			<f:selectItem itemValue="Palmeiras" />
+			<f:selectItem itemValue="Santos" />
+			<f:selectItem itemValue="São Paulo" />
+			<f:selectItem itemValue="Vasco" />
+			<f:selectItem itemValue="Outro" />
+		</h:selectOneListbox>
+
+		<hr />
+		<h:selectOneRadio id="sexo" layout="pageDirection">
+			<f:selectItem itemValue="M" itemLabel="Masculino" />
+			<f:selectItem itemValue="F" itemLabel="Feminino" />
+		</h:selectOneRadio>
+
+		<hr />
+		<h:selectBooleanCheckbox id="aceite"
+			value="#{cadastroTorcedorBean.termoAceito}" />
+		<h:outputLabel value="Li e aceito os termos e condições" for="aceite" />
+
+		<hr />
+		<h:selectManyCheckbox id="assuntos"
+			value="#{cadastroTorcedorBean.assuntosInteresse}"
+			layout="pageDirection">
+			<f:selectItem itemValue="1" itemLabel="Java" />
+			<f:selectItem itemValue="2" itemLabel="Python" />
+			<f:selectItem itemValue="3" itemLabel="Ruby" />
+			<f:selectItem itemValue="4" itemLabel="PHP" />
+			<f:selectItem itemValue="5" itemLabel="Métodos ágeis" />
+		</h:selectManyCheckbox>
+
+		<hr />
+		<h:outputLabel value="Cidade natal: " for="cnatal" />
+		<h:selectOneListbox size="5" value="#{minhaCidadeBean.cidadeNatal}"
+			id="cnatal">
+			<f:selectItem itemValue="Selecione uma cidade" />
+			<f:selectItems value="#{minhaCidadeBean.todasCidades}" />
+		</h:selectOneListbox>
+
+		<hr />
+		<h:outputLink value="http://www.algaworks.com" target="_blank">
+			<f:param name="codigo" value="931" />
+			<f:param name="grupo" value="Java" />
+			<h:graphicImage value="/imagens/alga.jpeg" />
+		</h:outputLink>
+
+		<hr />
+		<h:messages showDetail="true" showSummary="true"
+			errorStyle="color: red" infoStyle="color: green"
+			warnStyle="color: orange" fatalStyle="color: gray" />
+		<h:outputLabel value="Nome:" />
+		<h:inputText value="#{cadastroBean.nome}" />
+		<h:commandButton value="Cadastrar" action="#{cadastroBean.cadastrar}" />
+
+
+		<hr />
+		<h:outputText value="Novo Livro" />
+		<br />
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Título: " />
+			<h:inputText value="#{livrosBean.novoLivro.titulo}" />
+			<h:outputLabel value="Autor: " />
+			<h:inputText value="#{livrosBean.novoLivro.autor}" />
+			<h:outputLabel />
+			<h:commandButton value="Adicionar" action="#{livrosBean.adicionar}" />
+		</h:panelGrid>
+
+		<hr />
+		<h:dataTable value="#{livrosBean.livros}" var="livro" border="1"
+			cellspacing="0" cellpadding="2">
+			<f:facet name="header">
+				Relação de livros favoritos
+			</f:facet>
+			<h:column>
+				<f:facet name="header">Título</f:facet>
+				<h:outputText value="#{livro.titulo}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Autor</f:facet>
+				<h:outputText value="#{livro.autor}" />
+			</h:column>
+		</h:dataTable>
+
+	</h:form>
+</h:body>
+
+</html>
